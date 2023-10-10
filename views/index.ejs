@@ -1,0 +1,152 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sih Hackathon</title>
+    <link rel="stylesheet" href="/css/styles.css">
+            
+    <script src="server.js">
+    </script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    <style>
+    /* body { margin: 0; padding: 0; } */
+    #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    </style>
+</head>
+<body>
+    <!-- <div class="data-container">
+        <div class="elements">
+            <h1><%=data[0].temperature%></h1>
+            <p>temperature</p>
+        </div>
+        <div class="elements">
+            <h1><%=data[0].humidity%></h1>
+            <p>Humidity</p>
+        </div>
+        <div class="elements">
+            <h1><%=data[0].rain%></h1>
+            <p>rain</p>
+        </div>
+        <div class="elements">
+            <h1><%=data[0].time%></h1>
+            <p>time</p>
+        </div>
+       
+    </div>
+    <br>
+    <br>
+    <p>motor status</p>
+    <h1><%=data[1].status%></h1> -->
+
+
+        <div class="wrapper">
+            <!-- <div class="nav">
+                <div class="right_nav">
+                    <a href="">
+                        <img src="" alt="">
+                    </a>
+                </div>
+                <div class="left_nav">
+                    <div class="nav_items">
+                        <a href="" class="items">Live Stock</a>
+                    </div>
+                    <div class="nav_items">
+                        <a href="" class="items">NPK</a>
+        
+                    </div>
+                    <div class="nav_items">
+                        <a href="" class="items">About Us</a>
+        
+                    </div>
+                    <div class="nav_items">
+                        <a href="" class="items">Contact Us</a>
+        
+                    </div>
+                </div>
+            </div> -->
+            <div class="data_section">
+                <div class="data">
+                    <img src="/images/temp_icon.png" alt="" height="50px";>
+                    <p class="data_desc">TEMPERATURE</p>
+                    <%const dataTemp=data[0].temperature%>
+                    <p class="value"><%=dataTemp.toFixed(2)%> °C</p>
+                </div>
+                <div class="data">
+                    <img src="/images/humidity.png" alt="" height="50px">
+                    <p class="data_desc">HUMIDITY</p>
+                    <p class="value" ><%=data[0].humidity%></p>
+                </div>
+                 <div class="data">
+                    <img src="/images/cow.png" alt="" height="50px">
+                    <p class="data_desc">LIVESTOCK BPM</p>
+                    
+                    <p class="value"><%=data[1].BPM%></p>
+                </div>
+                <form action="/maps" method="post">
+                   
+                    <div class="data">
+                    <img src="/images/map.png" alt="" height="60px">
+                    <button class="data_desc btn" type="submit">Track Location</button>
+                   
+                    
+                </div>
+                </form>
+                
+               <!-- <div class="data">
+                    <img height="50px" weather_img>
+                    <p class="data_desc">Weather</p>
+                    <p class="value" weather_value></p>
+                </div>
+                <div class="data">
+                    <img src="/images/rain.png" alt="" height="50px">
+                    <p class="data_desc">RAIN</p>
+                    <p class="value"><%=data[0].rain%></p>
+                </div>
+            </div> -->
+            <!-- <div class="motor_section">
+                <div class="text">
+                    <p class="motor_text">MOTOR STATUS&nbsp;&nbsp;&nbsp;:</p>
+                    <p class="status_value" ><%=data[1].status%></p>
+                </div>
+                <div class="btn">
+                    <input type="checkbox" id="switch" onclick="clicked()"/>
+                    <label for="switch">Toggle</label>
+                </div>
+            </div> -->
+        </div>
+<!--         
+<button name="motorOn" onclick="motor_on(); refresh();">motor on</button>
+        <button name="motrorOn" onclick="motor_off(); refresh();">motor off</button>
+-->
+
+
+
+
+
+
+
+  
+    <script>
+        // function refresh(){
+            
+        //     window.location.reload()
+        // }
+        // function motor_on(){
+        //     fetch('motor_on').then(Response=>Response.json()).then(data=>{console.log(data)});
+            
+        // }
+        // function motor_off(){
+        //     fetch('motor_off').then(Response=>Response.json().then(data=>console.log(data)));
+            
+        // }
+        // function track_me(){
+        //     fetch('track_me').then(Response=>Response.json().then(data=>console.log(data)));
+        // }
+      setTimeout(() => {
+   document.location.reload();
+ }, 2000);
+    </script>
+</body>
+</html>

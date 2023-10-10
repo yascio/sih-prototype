@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Track Location</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+.refreshButton{
+    position: absolute;
+    color: white;
+    background-color: #3F72AF;
+    border-radius: 5px;
+    width: 10%;
+    height: 5vh;
+    bottom: 50px;
+    left:50%;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size:medium;
+    font-weight: 600;
+
+}
+.refreshButton:hover{
+    background-color: #9ab5d5;
+    color: black;
+    cursor: pointer;
+    transition: all 200ms;
+}
+.goBack{
+    /* margin-top: 30px; */
+    position: absolute;
+    color: white;
+    background-color: #3F72AF;
+    border-radius: 5px;
+    width: 10%;
+    height: 5vh;
+    bottom:50px;
+    left:40%;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size:medium;
+    font-weight: 600;
+
+    
+   
+
+}
+.goBack:hover{
+    background-color: #9ab5d5;
+    color: black;
+    cursor: pointer;
+    transition: all 200ms; 
+}
+
+@media screen and (max-width: 480px){
+.goBack{
+    left:25%;
+    width: 25%;
+    bottom: 50px;
+
+}
+.refreshButton{
+    left: 50%;
+    width: 25%;
+    bottom: 50px;
+}
+}
+
+
+
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+   <button class="refreshButton" onclick="refresh()">Track Again</button>
+<form action="/" method="post">
+    <input class="goBack" type="submit" value="Go Back"/>
+</form> 
+
+
+
+<script>
+     let lon = '<%=data.Longitude%>';
+    lon = parseFloat(lon);
+
+ let id = 'C001'
+    let age = '11 yrs';
+    let weight = '1195 kgs';
+    let text = `Id : ${id},Age : ${age},
+               Weight : ${weight}`;
+    let lan = '<%=data.Latitude%>';
+    lan = parseFloat(lan);
+	// TO MAKE THE MAP APPEAR YOU MUST
+	// ADD YOUR ACCESS TOKEN FROM
+	// https://account.mapbox.com
+	mapboxgl.accessToken = 'pk.eyJ1Ijoic291bXlhNTQ2MyIsImEiOiJjbG1ycHdqamgwOXdvMmtudDU4bjdwcmI1In0.IBBqJ6dIkqoyGxNpbL1L7g';
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+        style: 'mapbox://styles/mapbox/satellite-streets-v12', // style URL
+        center: [lon,lan], // starting position [lng, lat]
+        zoom: 18 // starting zoom
+    });
+    const popup = new mapboxgl.Popup({ offset: 25 }).setText(text);
+
+const geojson = {
+    'type': 'FeatureCollection',
+    'features': [
+        {
+            'type': 'Feature',
+            'properties': {
+                'iconSize': [40, 40]
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [lon, lan]
+            }
+        }
+    ]
+}
+for (const marker of geojson.features) {
+    const el = document.createElement('div');
+    const width = marker.properties.iconSize[0];
+    const height = marker.properties.iconSize[1];
+    el.className = 'marker';
+    el.style.backgroundImage = `url(./images/cow.png)`;
+    el.style.width = `${width}px`;
+    el.style.height = `${height}px`;
+    el.style.backgroundSize = '100%';  
+    
+    new mapboxgl.Marker(el)
+    .setLngLat(marker.geometry.coordinates)
+    .setPopup(popup)
+    .addTo(map);
+// const marker1 = new mapboxgl.Marker()
+// .setLngLat([lon,lat])
+// .setPopup(popup)
+// .addTo(map);
+}   
+    function refresh(){
+        window.location.reload()
+    }
+</script>
+
+</body>
+</html>
